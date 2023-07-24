@@ -1,19 +1,22 @@
 # React Native Weather App
 
-First attempt at a React Native app. No previous experience with React or mobile development.
+This is my first Reactive Native app and also my first mobile app. Code written on my MacBook with VS Code using the iPhone simulator from XCode for testing (iPhone SE(3rd Gen)). 
 
-This code is a bit more of a sandbox application pulled together from numerous experiments whilst watching and following lots of tutorials. It is not complete as I simply ran out of time. 
+I ran out of my time to complete all the features in this coding challenge but have looked to demonstrate that I can pick up knowledge quickly to deliver working code.
 
-Code written on my MacBook using the iPhone simulator for some testing. 
+There are a lot of areas I researched but there was an element of not trying to run before I could walk. However, these are some of things I was thinking about :
 
-There are a lot of areas I researched but there was an element of not trying to run before I could walk. However, these are some of things I was thinking about:
+City Search
+Refactoring required to integrate the city search and add save functionality. City Search was a quick addition just to get as much functionality in as I could in the time I had available.
+
+Error Handling
+Improve error handling through use of error boundaries.
+
+Layout with Flexbox
+Focus was more on the functional side of the app. The look and feel of the application could also be improved significantly.
 
 SOLID Principles
-With C# backend development as my background, my first though on coding standards was the SOLID principles. This article in particular was useful: https://medium.com/docler-engineering/applying-solid-to-react-ca6d1ff926a4
+With C# backend development as my background, my first though on coding standards was the SOLID principles. This article in particular was useful: https://medium.com/docler-engineering/applying-solid-to-react-ca6d1ff926a4. On reaching a working application, I would have refactored to apply these principles.
 
 Unit Testing
-Unit tests for the React components is something I would have liked to have included based on this article: https://blog.logrocket.com/unit-testing-react-native/
-
-Further thoughts:
-Automated tests - Use Wiremock to mock API response
-UI - Not relevant to this app but can ION be used as a framework for the new app? 
+Unit tests for the React components is something I would have liked to have included based on this article: https://blog.logrocket.com/unit-testing-react-native/. The SOLID principles, in general, lead to testable code so writing tests would have been done alongside the refactor to apply those principles.

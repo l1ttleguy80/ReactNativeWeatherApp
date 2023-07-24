@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 import * as Location from 'expo-location';
 import Swiper from 'react-native-swiper'
 import WeatherToday from './components/WeatherToday';
 import WeatherForecast from './components/WeatherForecast';
+import CitySearch from './components/CitySearch';
 import { API_KEY } from './utils/WeatherAPIKey';
 
 export default function App() {
@@ -19,7 +20,7 @@ export default function App() {
 
       let location = await Location.getCurrentPositionAsync({});
       fetchDataFromApi(location.coords.latitude, location.coords.longitude);
-    })();
+    })().catch(err => console.log(err)); 
   }, [])
 
   const fetchDataFromApi = (latitude, longitude) => {
@@ -27,8 +28,7 @@ export default function App() {
       fetch(`https://api.openweathermap.org/data/3.0/onecall?lat=${latitude}&lon=${longitude}&exclude=hourly,minutely&units=metric&appid=${API_KEY}`)
       .then(res => res.json())
       .then(data => {
-      console.log(data.daily)
-      console.log(data.timezone)
+      console.log(data)
       setData(data)
       })
     }
@@ -39,6 +39,7 @@ export default function App() {
       <Swiper showsButtons>
         <WeatherToday current={data.current} timezone={data.timezone}/>
         <WeatherForecast data={data.daily}/>
+        <CitySearch/>
       </Swiper>
     </View>
   );

@@ -5,22 +5,24 @@ import moment from 'moment-timezone'
 const WeatherForecast = ({data}) => {
   if(data)
   {
-    console.log(data.length);
     return (
       <View style={styles.container}>
         {
           data && data.length > 0 ? 
   
           data.map((data, idx) => (
-            idx !== 0 &&  <ForecastItem key={idx} forecastItem={data}/>
+            idx !== 0 && idx < 6 &&  <ForecastItem key={idx} forecastItem={data}/>
           ))
           :
           <View/>
         }
       </View>
     )}else{
-      <Text>Nah</Text>
-    }
+      return (
+      <View style={styles.errorContainer}>
+        <Text style={styles.error}>Error retrieving forecast</Text>
+      </View>
+    )}
   }
 
 const ForecastItem = ({forecastItem}) => {
@@ -49,7 +51,8 @@ export default WeatherForecast
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'column'
+    flexDirection: 'column',
+    marginTop: 10
   },
 image: {
     width: 75,
@@ -63,11 +66,12 @@ futureForecastItemContainer: {
   marginHorizontal: 15
 },
 headerContainer: {
-  alignItems: 'center',
+  alignItems: 'center'
 },
 bodyContainer: {
   flexDirection: 'row',
   justifyContent: 'space-around',
+  alignItems: 'center'
 },
 forecastDetails: {
   textAlign: 'left'
@@ -77,7 +81,6 @@ day: {
   color: 'white',
   textAlign: 'center',
   fontWeight: '500',
-  marginBottom: 10
 },
 temp: {
   fontSize: 20,
@@ -88,5 +91,16 @@ description: {
   fontSize: 16,
   color: 'white',
   fontWeight: '100',
+},
+errorContainer: {
+  flex: 1,
+  justifyContent: 'center',
+  marginTop: 10
+},
+error: {
+  fontSize: 25,
+  color: 'white',
+  textAlign: 'center',
+  fontWeight: '500',
 }
 })

@@ -4,21 +4,24 @@ import { StyleSheet, Text, View, Image } from 'react-native';
 const WeatherToday = ({current,timezone}) => {
   if(current && timezone)
   {
-  const img = {uri: `https://openweathermap.org/img/wn/${current.weather[0].icon}@2x.png`}
-  return (
-    <View style={styles.weatherContainer}>
-      <View style={styles.headerContainer}>
-        <Image source={img} style={styles.image} />
-        <Text style={styles.tempText}>{current.temp}&#176;C</Text>
+    const img = {uri: `https://openweathermap.org/img/wn/${current.weather[0].icon}@2x.png`}
+    return (
+      <View style={styles.weatherContainer}>
+        <View style={styles.headerContainer}>
+          <Image source={img} style={styles.image} />
+          <Text style={styles.tempText}>{current.temp}&#176;C</Text>
+        </View>
+        <View View style={styles.bodyContainer}>
+          <Text style={styles.title}>{current.weather[0].description}</Text>
+          <Text style={styles.subtitle}>{timezone}</Text>
+        </View>
       </View>
-      <View style={styles.bodyContainer}>
-        <Text style={styles.title}>{current.weather[0].description}</Text>
-        <Text style={styles.subtitle}>{timezone}</Text>
-      </View>
-    </View>
   )}else{
-    <Text styles={styles.title}>Error retrieving forecast</Text>
-  }
+    return (
+      <View style={styles.errorContainer}>
+        <Text style={styles.error}>Error retrieving forecast</Text>
+      </View>
+  )}
 }
 
 export default WeatherToday
@@ -56,5 +59,16 @@ const styles = StyleSheet.create({
   subtitle: {
     fontSize: 24,
     color: '#fff'
+  },
+  errorContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    marginTop: 10
+  },
+  error: {
+    fontSize: 25,
+    color: 'white',
+    textAlign: 'center',
+    fontWeight: '500',
   }
 });
