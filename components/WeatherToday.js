@@ -1,9 +1,10 @@
 import React from 'react'
 import { StyleSheet, Text, View, Image } from 'react-native';
 
-const WeatherToday = ({current, timezone}) => {
-  const icon = current.weather[0].icon
-  const img = {uri: `https://openweathermap.org/img/wn/${icon}@2x.png`}
+const WeatherToday = ({current,timezone}) => {
+  if(current && timezone)
+  {
+  const img = {uri: `https://openweathermap.org/img/wn/${current.weather[0].icon}@2x.png`}
   return (
     <View style={styles.weatherContainer}>
       <View style={styles.headerContainer}>
@@ -15,7 +16,9 @@ const WeatherToday = ({current, timezone}) => {
         <Text style={styles.subtitle}>{timezone}</Text>
       </View>
     </View>
-  )
+  )}else{
+    <Text styles={styles.title}>Error retrieving forecast</Text>
+  }
 }
 
 export default WeatherToday

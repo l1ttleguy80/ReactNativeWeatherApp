@@ -1,34 +1,47 @@
 import React from 'react'
 import { StyleSheet, Text, View, Image } from 'react-native';
+import moment from 'moment-timezone'
 
-const WeatherForecast = () => {
-  return (
-    <View style={styles.container}>
-      <ForecastItem />
-      <ForecastItem />
-      <ForecastItem />
-      <ForecastItem />
-      <ForecastItem />
-    </View>
-  )
-}
+const WeatherForecast = ({data}) => {
+  if(data)
+  {
+    console.log(data.length);
+    return (
+      <View style={styles.container}>
+        {
+          data && data.length > 0 ? 
+  
+          data.map((data, idx) => (
+            idx !== 0 &&  <ForecastItem key={idx} forecastItem={data}/>
+          ))
+          :
+          <View/>
+        }
+      </View>
+    )}else{
+      <Text>Nah</Text>
+    }
+  }
 
-const ForecastItem = () => {
-  const img = {uri: 'https://openweathermap.org/img/wn/10d@2x.png'}
-  return (
+const ForecastItem = ({forecastItem}) => {
+  if(forecastItem)
+  {
+    const img = {uri: "http://openweathermap.org/img/wn/"+forecastItem.weather[0].icon+"@2x.png"}
+    return (
       <View style={styles.futureForecastItemContainer} >
         <View style={styles.headerContainer}>
-          <Text style={styles.day}>Mon</Text>
+          <Text style={styles.day}>{moment(forecastItem.dt * 1000).format('ddd')}</Text>
         </View>
         <View style={styles.bodyContainer}>
           <Image source={img} style={styles.image}/>
           <View style={styles.forecastDetails}>
-            <Text style={styles.temp}>32&#176;C</Text>
-            <Text style={styles.description}>Sunny</Text>
+            <Text style={styles.temp}>{forecastItem.temp.day}&#176;C</Text>
+            <Text style={styles.description}>{forecastItem.weather[0].description}</Text>
           </View>
         </View> 
       </View>
-  )
+    )
+  }
 }
 
 export default WeatherForecast

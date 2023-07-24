@@ -24,10 +24,10 @@ export default function App() {
 
   const fetchDataFromApi = (latitude, longitude) => {
     if(latitude && longitude) {
-      fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=hourly,minutely&units=metric&appid=${API_KEY}`)
+      fetch(`https://api.openweathermap.org/data/3.0/onecall?lat=${latitude}&lon=${longitude}&exclude=hourly,minutely&units=metric&appid=${API_KEY}`)
       .then(res => res.json())
       .then(data => {
-      console.log(data)
+      console.log(data.daily)
       console.log(data.timezone)
       setData(data)
       })
@@ -38,7 +38,7 @@ export default function App() {
     <View loop={false} style={styles.container}>
       <Swiper showsButtons>
         <WeatherToday current={data.current} timezone={data.timezone}/>
-        <WeatherForecast />
+        <WeatherForecast data={data.daily}/>
       </Swiper>
     </View>
   );
